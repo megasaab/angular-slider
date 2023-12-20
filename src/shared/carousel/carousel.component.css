@@ -1,0 +1,40 @@
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 50px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.prev {
+  left: 10px;
+  color: #3498db;
+}
+
+.next {
+  right: 10px;
+  color: #3498db;
+}
+
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

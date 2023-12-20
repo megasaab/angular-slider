@@ -1,0 +1,13 @@
+<div class="carousel-container">
+  <div class="carousel" [style.transform]="'translateX(' + translateValue + 'px)'">
+    <ng-content></ng-content>
+  </div>
+  <button (click)="prevSlide()" class="arrow prev">&lt;</button>
+  <button (click)="nextSlide()" class="arrow next">&gt;</button>
+
+  <div class="settings-container">
+    <input type="number" placeholder="Таймер" #timer>
+    <input type="number" placeholder="Колл-во картинок" #itemsCount>
+    <button (click)="onApplySettingsClicked(timer.value, itemsCount.value)">Apply</button>
+  </div>
+</div>
