@@ -6,8 +6,11 @@
   <button (click)="nextSlide()" class="arrow next">&gt;</button>
 
   <div class="settings-container">
-    <input type="number" placeholder="Таймер" #timer>
-    <input type="number" placeholder="Колл-во картинок" #itemsCount>
-    <button (click)="onApplySettingsClicked(timer.value, itemsCount.value)">Apply</button>
+    @if (items?.length) {
+      <input type="number" placeholder="Таймер" #timer>
+      <input type="number" placeholder="Колл-во картинок" #itemsCount>
+      <button (click)="onApplySettingsClicked(timer.value, itemsCount.value)">Apply</button>
+      <button (click)="reset()">Reset</button>
+    }
   </div>
 </div>

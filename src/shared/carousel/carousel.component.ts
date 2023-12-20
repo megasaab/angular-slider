@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {SliderInterface} from '../../interfaces/slider.interface';
 import {BehaviorSubject, Subject, switchMap, takeUntil, timer} from 'rxjs';
 
@@ -13,6 +13,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
   items: SliderInterface[] = [];
   @Input()
   intervalTimer: number = 5000;
+
+  @Output()
+  applySettingsEmitter = new EventEmitter();
 
   private destroy$: Subject<void> = new Subject<void>();
   private timer$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -72,11 +75,23 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   onApplySettingsClicked(timer: any, itemsCount: any) {
-    this.destroy$.next();
-    this.destroy$.complete()
-    this.destroy$ = new Subject<void>();
-    this.intervalTimer = timer * 1000;
-    this.startTimer();
+    if (timer) {
+      this.destroy$.next();
+      this.destroy$.complete()
+      this.destroy$ = new Subject<void>();
+      this.intervalTimer = timer * 1000;
+      this.startTimer();
+    }
+    if (itemsCount && itemsCount < this.items.length) {
+      this.applySettingsEmitter.emit({itemsCount});
+      this.translateValue = 0;
+      this.currentIndex  = 0;
+      this.itemWidth = 200;
+    }
+  }
+
+  reset() {
+    window.location.reload();
   }
 
   ngOnDestroy() {

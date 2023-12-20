@@ -1,9 +1,12 @@
 <app-spinner></app-spinner>
 
-<app-carousel [items]="items" [intervalTimer]="intervalTime">
+<app-carousel [items]="items" [intervalTimer]="intervalTime" (applySettingsEmitter)="setItemsCount($event)">
   @for (item of items; track $index) {
-    <div  class="carousel-item">
-      <img [src]="item.image" alt="slider image" width="200" height="200">
+    <div class="carousel-item">
+      <div>
+        <img [src]="item.image" alt="slider image" width="200" height="200">
+        <a [href]="item.url">link</a>
+      </div>
     </div>
   }
 </app-carousel>

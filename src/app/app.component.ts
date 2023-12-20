@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
 import {SpinnerComponent} from '../shared/spinner/spinner.component';
 import {SessionService} from '../services/session.service';
 import {CarouselComponent} from '../shared/carousel/carousel.component';
 import {ApiService} from '../services/api.service';
-import {interval, Observable, of, Subscription} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {SliderInterface} from '../interfaces/slider.interface';
 
 @Component({
@@ -59,10 +59,13 @@ export class AppComponent implements OnInit, OnDestroy {
     return of(this.apiService.mockApiData);
   }
 
+  setItemsCount(settings: {itemsCount: number}) {
+    this.items = this.items.slice(0, settings.itemsCount)
+    console.log(settings)
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
     clearTimeout(this.timeout);
   }
-
-  protected readonly interval = interval;
 }
